@@ -3,9 +3,65 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Bolt, Code, User, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Bolt, Code, User, Download, CheckCircle } from "lucide-react";
+import { Button } from "../components/Ui/button";
+
+function DownloadCVButton() {
+  const [downloading, setDownloading] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
+
+  const handleDownload = () => {
+    setDownloading(true);
+    setTimeout(() => {
+      setDownloading(false);
+      setDownloaded(true);
+      const link = document.createElement("a");
+      link.href = "/Amjad-Ali.pdf";
+      link.download = "Amjad-Ali-CV.pdf";
+      link.click();
+      setTimeout(() => setDownloaded(false), 3000);
+    }, 1500);
+  };
+
+  return (
+    <Button
+      onClick={handleDownload}
+      disabled={downloading}
+      variant="outline"
+      className="relative glass-card gap-2 h-12 px-6 font-bold group overflow-hidden
+        hover:scale-105 active:scale-95 transition-all duration-300
+        disabled:cursor-not-allowed"
+    >
+      {downloading && (
+        <span
+          className="absolute bottom-0 left-0 h-0.5 bg-primary"
+          style={{ animation: "loadingBar 1.5s ease-in-out forwards" }}
+        />
+      )}
+      {downloading ? (
+        <>
+          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+          </svg>
+          Downloading...
+        </>
+      ) : downloaded ? (
+        <>
+          <CheckCircle size={18} className="text-green-400" />
+          <span className="text-green-400">Downloaded!</span>
+        </>
+      ) : (
+        <>
+          <Download size={18} className="group-hover:translate-y-0.5 group-hover:animate-bounce transition-transform" />
+          Download CV
+        </>
+      )}
+    </Button>
+  );
+}
 
 export function About() {
   return (
@@ -21,7 +77,7 @@ export function About() {
             <div className="relative group">
               <div className="absolute inset-0 primary-gradient rounded-full blur-2xl opacity-20 group-hover:opacity-30 transition-opacity -z-10 scale-110" />
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
+                src="/8451.jpg"
                 alt="Amjad Ali"
                 className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-2 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105"
               />
@@ -36,7 +92,7 @@ export function About() {
           >
             <h2 className="text-4xl font-bold mb-6">About Me</h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              A results-driven Full Stack Software Engineer with over 4 years of hands-on experience in building robust web applications. 
+              A results-driven Full Stack Software Engineer with over 4 years of hands-on experience in building robust web applications.
               I specialize in the MERN stack and Next.js, bridging the gap between sophisticated design and technical feasibility.
             </p>
 
@@ -55,10 +111,7 @@ export function About() {
               </div>
             </div>
 
-            <Button variant="outline" className="glass-card gap-2 h-12 px-6 font-bold group">
-              <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
-              Download CV
-            </Button>
+            <DownloadCVButton />
           </motion.div>
         </div>
       </div>

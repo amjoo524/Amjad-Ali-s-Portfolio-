@@ -5,7 +5,7 @@
 
 import { motion } from "framer-motion";
 import { Monitor, Terminal, Database } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../components/Ui/badge";
 
 const skills = [
   {

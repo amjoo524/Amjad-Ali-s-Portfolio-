@@ -5,32 +5,33 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "../components/Ui/button";
+import { Badge } from "../components/Ui/badge";
+
 
 const projects = [
   {
-    title: "GoSawari",
-    description: "A modern ride-sharing and vehicle booking platform with real-time tracking and payment integration.",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop",
-    tags: ["React", "Express", "MongoDB", "Socket.io"],
-    live: "#",
+    title: "Northern Star Parenting",
+    description: "A comprehensive parenting guidance web app with articles, community forums, and expert resources for modern parents.",
+   image: "/Northren_parenting_Star.png",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Supabase", "ShadCN", ],
+    live: "https://app.northernstarparenting.com",
     github: "#",
   },
   {
-    title: "Northern Star Parenting",
-    description: "An educational portal providing resources and support for parents through interactive content.",
-    image: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=1000&auto=format&fit=crop",
-    tags: ["Next.js", "Firebase", "Tailwind"],
-    live: "#",
+    title: "GoSawari",
+    description: "A carpooling & ride-share platform for intercity and local travel across Pakistan. Connect with drivers, save cost, and travel with comfort.",
+     image: "/Gosawari-Carpolling.png",
+    tags: ["Next.js", "Node.js", "TypeScript", "MongoDB", "Express", "Tailwind", "Supabase"],
+    live: "https://www.gosawari.com",
     github: "#",
   },
   {
     title: "Fees Management System",
-    description: "A high-precision internal tool for tracking institutional fees, invoicing, and reporting.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-    tags: ["React", "Node.js", "PostgreSQL", "D3.js"],
-    live: "#",
+    description: "A full-featured institute fees management system with student records, payments tracking, and detailed reporting dashboard.",
+      image: "/Fees_managemant.png",
+    tags: ["Next.js", "Supabase", "ShadCN", "TypeScript", "Tailwind",],
+    live: "https://fees-managemnt-system-1wgi.vercel.app/dashboard",
     github: "#",
   },
 ];
@@ -43,13 +44,10 @@ export function Projects() {
           <div className="space-y-4">
             <h2 className="text-4xl font-bold">Featured Work</h2>
             <p className="text-muted-foreground max-w-xl text-lg">
-              A curated selection of my most challenging and impactful projects, 
+              A curated selection of my most challenging and impactful projects,
               showcasing full-stack expertise and design sensibilities.
             </p>
           </div>
-          <Button variant="link" className="text-primary gap-2 p-0 h-auto font-bold group">
-            VIEW ALL REPOS <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -62,36 +60,65 @@ export function Projects() {
               transition={{ delay: index * 0.1 }}
               className="glass-card rounded-3xl overflow-hidden group flex flex-col h-full"
             >
-              <div className="relative aspect-video overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                   <Button variant="secondary" className="font-bold">View Details</Button>
-                </div>
-              </div>
+              {/* Project Screenshot */}
+             <div className="relative overflow-hidden bg-[#1a1a2e]">
+  <img
+    src={project.image}
+    alt={project.title}
+    className="w-full aspect-video object-contain group-hover:scale-105 transition-transform duration-500"
+  />
+  {/* Hover Overlay */}
+  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+    <a href={project.live} target="_blank" rel="noopener noreferrer">
+      <Button variant="secondary" className="font-bold gap-2">
+        View Live <ExternalLink size={14} />
+      </Button>
+    </a>
+  </div>
+  <span className="absolute top-3 right-3 text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full backdrop-blur-sm">
+    Live
+  </span>
+</div>
 
+              {/* Card Content */}
               <div className="p-8 flex flex-col flex-grow">
-                <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                <p className="text-muted-foreground mb-6 line-clamp-3">
+                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+
+                <p className="text-muted-foreground mb-6 line-clamp-3 text-sm leading-relaxed">
                   {project.description}
                 </p>
+
                 <div className="flex flex-wrap gap-2 mb-8">
                   {project.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="bg-white/5 border-white/10 text-xs py-0.5 px-2">
-                       {tag}
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className="bg-white/5 border-white/10 text-xs py-0.5 px-2"
+                    >
+                      {tag}
                     </Badge>
                   ))}
                 </div>
+
                 <div className="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
-                  <a href={project.github} className="text-muted-foreground hover:text-white transition-colors">
+                  <a 
+                    href={project.github}
+                    className="text-muted-foreground hover:text-white transition-colors"
+                  >
                     <Github size={20} />
                   </a>
-                  <Button size="sm" className="primary-gradient font-bold h-10 px-5 gap-2 group">
-                    Live Link <ExternalLink size={14} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                  </Button>
+                  <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      size="sm"
+                      className="primary-gradient font-bold h-10 px-5 gap-2 group"
+                    >
+                      Live Link{" "}
+                      <ExternalLink
+                        size={14}
+                        className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+                      />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </motion.div>

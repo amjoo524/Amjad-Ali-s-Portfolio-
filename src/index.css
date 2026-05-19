@@ -102,7 +102,13 @@
     body {
         @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30 selection:text-primary;
     }
+
+    /* Offset anchor targets for the fixed navbar */
+    section[id] {
+        scroll-margin-top: 96px;
+    }
 }
+
 
 @layer components {
     .glass-card {
@@ -129,4 +135,9 @@
 }
 ::-webkit-scrollbar-thumb:hover {
     background: oklch(1 0 0 / 20%);
+}
+
+@keyframes loadingBar {
+  from { width: 0%; }
+  to { width: 100%; }
 }
